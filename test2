@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# 한국 인기 지역 Top 10 (예시 좌표)
+# 한국 인기 지역 Top 10 좌표 데이터
 locations = [
     {"name": "서울", "lat": 37.5665, "lon": 126.9780},
     {"name": "부산", "lat": 35.1796, "lon": 129.0756},
@@ -15,15 +15,16 @@ locations = [
     {"name": "속초", "lat": 38.2048, "lon": 128.5911},
 ]
 
-# DataFrame으로 변환
+# DataFrame으로 변환 및 열 이름 변경
 df = pd.DataFrame(locations)
 df = df.rename(columns={"lat": "latitude", "lon": "longitude"})
 
+# Streamlit 앱 제목
 st.title("한국 인기 지역 Top 10 지도 (folium 없이)")
 
 # st.map()으로 지도 출력
 st.map(df)
 
-# 선택된 지역 정보 출력 (선택 기능은 없지만 리스트 보여주기)
-st.write("지역 리스트:")
+# 데이터 테이블로 보여주기
+st.subheader("지역 리스트")
 st.table(df[["name", "latitude", "longitude"]])
